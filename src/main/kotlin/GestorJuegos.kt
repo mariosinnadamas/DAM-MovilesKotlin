@@ -58,6 +58,7 @@ class GestorJuegos {
         }
     }
 
+    //Metodo para cargar datos
     fun cargarDatos(){
         val f = File ("Recursos/juegosdemesa.txt")
         try {
@@ -67,15 +68,19 @@ class GestorJuegos {
 
                     val tipo = datos[0]
                     val titulo = datos[1]
-                    val nMin = datos [2]
-                    val nMax = datos[3]
+                    val nMin = datos [2].toInt()
+                    val nMax = datos[3].toInt()
                     val duracion = datos[4].toInt()
                     val tipoJuego = Juego.TipoJuego.valueOf(datos[5])
 
                     when (tipo) {
                         "CARTAS" -> {
                             val numCartas = datos[6].toInt()
-                            //coleccionJuegos.add(JuegoCartas(titulo,nMin,nMax,duracion, tipoJuego))
+                            coleccionJuegos.add(JuegoCartas(titulo,nMin,nMax,duracion, tipoJuego,numCartas))
+                        }
+                        "TABLERO" -> {
+                            val tablero = datos[6]
+                            coleccionJuegos.add(JuegoTablero(titulo,nMin,nMax,duracion,tipoJuego,tablero))
                         }
                     }
                 }

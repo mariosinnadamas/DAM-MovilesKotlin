@@ -1,0 +1,1 @@
+CARTAS,  Prueba,2,4,90,ESTRATEGIA,40
