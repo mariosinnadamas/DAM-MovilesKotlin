@@ -12,6 +12,7 @@ fun main(){
         println("2. Listar juegos")
         println("3. Buscar juego por nombre")
         println("4. Salir")
+
         eleccion = sc.nextLine()
         when(eleccion){
             "1" -> {
