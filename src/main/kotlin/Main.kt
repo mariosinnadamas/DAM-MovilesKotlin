@@ -2,9 +2,8 @@ import Juego.TipoJuego
 import java.util.*
 
 fun main(){
-    val sc = Scanner (System.`in`)
-    val gestor: GestorJuegos = GestorJuegos()
-    var eleccion : String
+    val gestor = GestorJuegos()
+    var comprobado = false //Variable reutilizada para comprobaciones
 
     while (true){
         println("MENU DE JUEGOS DE MESA")
@@ -13,18 +12,18 @@ fun main(){
         println("3. Buscar juego por nombre")
         println("4. Salir")
 
-        eleccion = sc.nextLine()
+        val eleccion = readln()
+
         when(eleccion){
             "1" -> {
                 println("MENÚ INSERCIÓN DE JUEGO")
 
-                var comprobado = false
                 var nombreJuego = ""
                 while (!comprobado){
                     println("Ingrese el nombre del juego:")
-                    var nombreJuego = sc.nextLine()
+                    nombreJuego = readln()
                     if (nombreJuego.isNotEmpty()){
-                        comprobado = true;
+                        comprobado = true
                     } else{
                         println("No puedes dejar el nombre vacío")
                     }
@@ -34,12 +33,13 @@ fun main(){
                 var nMin = 0
                 while (!comprobado) {
                     println("Ingrese número mínimo de jugadores: ")
-                    val input = sc.nextLine()
+                    val input = readln()
 
                     if (input.isEmpty()) {
                         System.err.println("No puedes dejar este campo vacío")
                         continue
                     }
+
                     try {
                         nMin = input.toInt()
                         if (nMin < 1) {
@@ -48,16 +48,16 @@ fun main(){
                             comprobado = true
                         }
                     } catch (e: NumberFormatException) {
-                        System.err.println("Debe introducir un numero entero")
+                        System.err.println("Debe introducir un numero entero ")
                     }
                 }
 
                 comprobado =  false
 
-                var nMax: Int = 0
+                var nMax = 0
                 while (!comprobado) {
                     println("Ingrese número máximo de jugadores: ")
-                    val input = sc.nextLine()
+                    val input = readln()
 
                     if (input.isEmpty()) {
                         System.err.println("No puedes dejar este campo vacío")
@@ -70,17 +70,16 @@ fun main(){
                         } else {
                             comprobado = true
                         }
-                    } catch (e: java.lang.NumberFormatException) {
+                    } catch (e: NumberFormatException) {
                         System.err.println("Debe introducir un numero entero")
                     }
                 }
-
                 comprobado = false
 
                 var duracionMin = 0
                 while (!comprobado) {
                     println("Ingrese la duración en minutos: ")
-                    val input = sc.nextLine()
+                    val input = readln()
 
                     if (input.isEmpty()) {
                         System.err.println("No puedes dejar este campo vacío")
@@ -106,7 +105,7 @@ fun main(){
                         println(t)
                     }
 
-                    val tipo = sc.nextLine().uppercase(Locale.getDefault())
+                    val tipo = readln().uppercase()
                     try {
                         tipoJuego = TipoJuego.valueOf(tipo)
                     } catch (e: IllegalArgumentException) {
@@ -119,7 +118,7 @@ fun main(){
                     println("Seleccione el tipo de juego: ")
                     println("1. Juego de cartas")
                     println("2. Juego de tablero")
-                    val input = sc.nextLine()
+                    val input = readln()
 
                     if (input.isEmpty()) {
                         System.err.println("No puedes dejar este campo vacío")
@@ -136,14 +135,13 @@ fun main(){
                         System.err.println("Debe introducir un numero entero")
                     }
                 }
-
                 comprobado = false
 
                 if (decTipo == 1) {
                     var nCartas: Int
                     while (!comprobado) {
                         println("¿Cuántas cartas tiene?")
-                        val input = sc.nextLine()
+                        val input = readln()
 
                         if (input.isEmpty()) {
                             System.err.println("No puedes dejar este campo vacío")
@@ -168,7 +166,7 @@ fun main(){
                     var tablero: String
                     while (!comprobado) {
                         println("¿Cuanto mide el tablero? Ej: 20x20, 15x20, etc")
-                        tablero = sc.nextLine()
+                        tablero = readln()
                         if (tablero.isEmpty()) {
                             System.err.println("Debe introducir un tamaño de tablero")
                         } else {
@@ -184,7 +182,7 @@ fun main(){
             "3" -> {
                 println("MENÚ BUSQUEDA POR TITULO")
                 print("Inserte el titulo del juego: ")
-                val titulo = sc.nextLine()
+                val titulo = readln()
                 gestor.busquedaPorTitulo(titulo)
             }
             "4" -> break
