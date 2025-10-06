@@ -3,6 +3,7 @@ import Juego.TipoJuego
 fun main(){
     val gestor = GestorJuegos()
     var comprobado = false //Variable reutilizada para comprobaciones
+    gestor.cargarDatos()
 
     while (true){
         println("MENU DE JUEGOS DE MESA")
@@ -184,7 +185,10 @@ fun main(){
                 val titulo = readln()
                 gestor.busquedaPorTitulo(titulo)
             }
-            "4" -> break
+            "4" -> {
+                gestor.guardarDatos()
+                break
+            }
         }
     }
 }
