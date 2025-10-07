@@ -21,7 +21,7 @@ fun main(){
                 var nombreJuego = ""
                 while (!comprobado){
                     println("Ingrese el nombre del juego:")
-                    nombreJuego = readln()
+                    nombreJuego = readln().trim()
                     if (nombreJuego.isNotEmpty()){
                         comprobado = true
                     } else{

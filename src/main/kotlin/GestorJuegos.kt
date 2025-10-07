@@ -43,8 +43,8 @@ class GestorJuegos {
             f.bufferedWriter().use { bw ->
                 for (temp in coleccionJuegos){
                     val linea = when (temp) {
-                        is JuegoCartas -> "CARTAS, ${temp.titulo},${temp.nMin},${temp.nMax},${temp.duracionMinutos},${temp.tipo},${temp.nCartas}"
-                        is JuegoTablero -> "TABLERO, ${temp.titulo},${temp.nMin},${temp.nMax},${temp.duracionMinutos},${temp.tipo},${temp.tamanoTablero}"
+                        is JuegoCartas -> "CARTAS,${temp.titulo},${temp.nMin},${temp.nMax},${temp.duracionMinutos},${temp.tipo},${temp.nCartas}"
+                        is JuegoTablero -> "TABLERO,${temp.titulo},${temp.nMin},${temp.nMax},${temp.duracionMinutos},${temp.tipo},${temp.tamanoTablero}"
                         else -> continue //Esto nunca va a pasar, por seguridad se ignora
                     }
                     bw.write(linea)
@@ -66,8 +66,8 @@ class GestorJuegos {
                 br.forEachLine { linea ->
                     val datos = linea.split(",")
 
-                    val tipo = datos[0]
-                    val titulo = datos[1]
+                    val tipo = datos[0].trim()
+                    val titulo = datos[1].trim()
                     val nMin = datos [2].toInt()
                     val nMax = datos[3].toInt()
                     val duracion = datos[4].toInt()
