@@ -9,6 +9,7 @@ import kotlin.text.lowercase
 class GestorJuegos {
 
     //Coleccion ordenada por nombre, case-insensitive
+    //Mutable set es que permite mutar (editar) la lista
     val coleccionJuegos: MutableSet<Juego> =
         TreeSet (compareBy (String.CASE_INSENSITIVE_ORDER){ it.titulo })
 
