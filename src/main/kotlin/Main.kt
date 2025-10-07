@@ -1,4 +1,6 @@
 import Juego.TipoJuego
+import java.util.Locale
+import java.util.Locale.getDefault
 
 fun main(){
     val gestor = GestorJuegos()
@@ -182,7 +184,7 @@ fun main(){
             "3" -> {
                 println("MENÚ BUSQUEDA POR TITULO")
                 print("Inserte el titulo del juego: ")
-                val titulo = readln()
+                val titulo = readln().lowercase(getDefault())
                 gestor.busquedaPorTitulo(titulo)
             }
             "4" -> {

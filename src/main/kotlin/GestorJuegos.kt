@@ -26,14 +26,16 @@ class GestorJuegos {
 
     //Metodo para buscar por titulo
     fun busquedaPorTitulo(titulo : kotlin.String){
-        var encontrado = Boolean
+        var encontrado : Boolean = false
         for(temp in coleccionJuegos){
             val tituloJuego : kotlin.String = temp.titulo.lowercase()
             if (tituloJuego.startsWith(titulo)){
                 println(temp)
-            } else{
-                println("No se ha encontrado")
+                encontrado = true
             }
+        }
+        if (!encontrado) {
+            println("No se ha encontrado")
         }
     }
     //Metodo para guardar datos en un fichero
@@ -61,32 +63,37 @@ class GestorJuegos {
     //Metodo para cargar datos
     fun cargarDatos(){
         val f = File ("Recursos/juegosdemesa.txt")
-        try {
-            f.bufferedReader().use() { br ->
-                br.forEachLine { linea ->
-                    val datos = linea.split(",")
+        if (f.exists()){
+            try {
+                f.bufferedReader().use() { br ->
+                    br.forEachLine { linea ->
+                        val datos = linea.split(",")
 
-                    val tipo = datos[0].trim()
-                    val titulo = datos[1].trim()
-                    val nMin = datos [2].toInt()
-                    val nMax = datos[3].toInt()
-                    val duracion = datos[4].toInt()
-                    val tipoJuego = Juego.TipoJuego.valueOf(datos[5])
+                        val tipo = datos[0].trim()
+                        val titulo = datos[1].trim()
+                        val nMin = datos [2].toInt()
+                        val nMax = datos[3].toInt()
+                        val duracion = datos[4].toInt()
+                        val tipoJuego = Juego.TipoJuego.valueOf(datos[5])
 
-                    when (tipo) {
-                        "CARTAS" -> {
-                            val numCartas = datos[6].toInt()
-                            coleccionJuegos.add(JuegoCartas(titulo,nMin,nMax,duracion, tipoJuego,numCartas))
-                        }
-                        "TABLERO" -> {
-                            val tablero = datos[6]
-                            coleccionJuegos.add(JuegoTablero(titulo,nMin,nMax,duracion,tipoJuego,tablero))
+                        when (tipo) {
+                            "CARTAS" -> {
+                                val numCartas = datos[6].toInt()
+                                coleccionJuegos.add(JuegoCartas(titulo,nMin,nMax,duracion, tipoJuego,numCartas))
+                            }
+                            "TABLERO" -> {
+                                val tablero = datos[6]
+                                coleccionJuegos.add(JuegoTablero(titulo,nMin,nMax,duracion,tipoJuego,tablero))
+                            }
                         }
                     }
                 }
+            } catch (e: FileNotFoundException){
+                println("Archivo no encontrado: ${e.cause}")
             }
-        } catch (e: FileNotFoundException){
-            println("Archivo no encontrado: ${e.cause}")
+        } else {
+            f.createNewFile()
         }
+
     }
 }

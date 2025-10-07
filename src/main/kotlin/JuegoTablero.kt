@@ -13,4 +13,8 @@ class JuegoTablero (
                 "| Duracion: $duracionMinutos min" +
                 "| Tablero: $tamanoTablero"
     }
+
+    override fun toString(): String {
+        return getDescripcion()
+    }
 }

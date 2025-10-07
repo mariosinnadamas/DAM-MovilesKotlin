@@ -14,4 +14,8 @@ class JuegoCartas(
                 "| Duracion: $duracionMinutos min" +
                 "| Nº de cartas: $nCartas"
     }
+
+    override fun toString(): String {
+        return getDescripcion()
+    }
 }
